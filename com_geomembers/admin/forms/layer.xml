@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<form addfieldprefix="Steevo\Component\GeoMembers\Administrator\Field">
+	<fieldset name="main">
+		<field name="id" type="hidden" default="0" />
+		<field name="title" type="text" required="true" label="JGLOBAL_TITLE" />
+		<field name="alias" type="text" label="JFIELD_ALIAS_LABEL" hint="JFIELD_ALIAS_PLACEHOLDER" />
+		<field name="geometry" type="text" required="true" label="COM_GEOMEMBERS_FIELD_GEOMETRY_LABEL" description="COM_GEOMEMBERS_FIELD_GEOMETRY_DESC" />
+		<field name="object" type="text" default="zones" label="COM_GEOMEMBERS_FIELD_OBJECT_LABEL" description="COM_GEOMEMBERS_FIELD_OBJECT_DESC" />
+		<field name="code_property" type="text" default="code" label="COM_GEOMEMBERS_FIELD_CODE_PROPERTY_LABEL" />
+		<field name="name_property" type="text" default="name" label="COM_GEOMEMBERS_FIELD_NAME_PROPERTY_LABEL" description="COM_GEOMEMBERS_FIELD_NAME_PROPERTY_DESC" />
+		<field name="projection" type="list" default="equalEarth" label="COM_GEOMEMBERS_FIELD_PROJECTION_LABEL">
+			<option value="equalEarth">COM_GEOMEMBERS_PROJECTION_EQUALEARTH</option>
+			<option value="naturalEarth">COM_GEOMEMBERS_PROJECTION_NATURALEARTH</option>
+			<option value="mercator">COM_GEOMEMBERS_PROJECTION_MERCATOR</option>
+			<option value="conic">COM_GEOMEMBERS_PROJECTION_CONIC</option>
+			<option value="lambert93">COM_GEOMEMBERS_PROJECTION_LAMBERT93</option>
+		</field>
+		<field name="foreign_layer_id" type="geomemberslayer" label="COM_GEOMEMBERS_FIELD_FOREIGN_LAYER_LABEL" description="COM_GEOMEMBERS_FIELD_FOREIGN_LAYER_DESC">
+			<option value="0">JNONE</option>
+		</field>
+		<field name="parent_code" type="text" label="COM_GEOMEMBERS_FIELD_PARENT_CODE_LABEL" description="COM_GEOMEMBERS_FIELD_PARENT_CODE_DESC" />
+		<field name="insets" type="textarea" rows="6" label="COM_GEOMEMBERS_FIELD_INSETS_LABEL" description="COM_GEOMEMBERS_FIELD_INSETS_DESC" class="font-monospace" />
+		<field name="placements" type="textarea" rows="5" label="COM_GEOMEMBERS_FIELD_PLACEMENTS_LABEL" description="COM_GEOMEMBERS_FIELD_PLACEMENTS_DESC" class="font-monospace" showon="foreign_layer_id!:0" />
+		<field name="attribution" type="text" label="COM_GEOMEMBERS_FIELD_ATTRIBUTION_LABEL" description="COM_GEOMEMBERS_FIELD_ATTRIBUTION_DESC" />
+	</fieldset>
+	<fieldset name="side">
+		<field name="published" type="list" default="1" label="JSTATUS" class="form-select-color-state">
+			<option value="1">JPUBLISHED</option>
+			<option value="0">JUNPUBLISHED</option>
+		</field>
+		<field name="ordering" type="number" default="0" label="JFIELD_ORDERING_LABEL" />
+	</fieldset>
+</form>

@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<title>GeoMembers – génération des TopoJSON</title>
+<script src="lib/d3.min.js"></script>
+<script src="lib/topojson-server.min.js"></script>
+<script src="lib/topojson-simplify.min.js"></script>
+<script src="lib/topojson-client.min.js"></script>
+</head>
+<body>
+<h1>Génération des fonds GeoMembers</h1>
+<p>Outil de développement : lit les GeoJSON de <code>build/src</code>, construit des TopoJSON quantifiés et simplifiés,
+puis les enregistre dans <code>com_geomembers/media/geo</code> via <code>save.php</code>.</p>
+<button id="go">Générer</button>
+<pre id="log"></pre>
+<script>
+const log = (m) => { document.getElementById('log').textContent += m + '\n'; };
+
+const jobs = [
+  {
+    src: 'src/dep.geojson', out: 'fr-departements.json', object: 'zones', minWeight: 0.0015, quantize: 1e5,
+    keep: (p) => !['975', '977', '978', '984', '986', '987', '988', '989'].includes(p.code),
+    props: (p) => ({ code: p.code, name: p.nom, region: p.region })
+  },
+  {
+    src: 'src/ne50.geojson', out: 'world-countries.json', object: 'zones', minWeight: 0.05, quantize: 1e4,
+    props: (p) => {
+      const iso = (p.ISO_A2_EH && p.ISO_A2_EH !== '-99' && p.HOMEPART === 1) ? p.ISO_A2_EH : p.ADM0_A3;
+      return {
+        code: iso, name: p.NAME_EN, name_fr: p.NAME_FR, name_en: p.NAME_EN, name_de: p.NAME_DE,
+        name_es: p.NAME_ES, continent: p.CONTINENT, subregion: p.SUBREGION, lx: p.LABEL_X, ly: p.LABEL_Y
+      };
+    }
+  }
+];
+
+// Orientation attendue par d3 (anneaux extérieurs dans le sens horaire) : on inverse les polygones « retournés »
+function rewind(g) {
+  if (!g) { return; }
+  const polys = g.type === 'Polygon' ? [g.coordinates] : (g.type === 'MultiPolygon' ? g.coordinates : []);
+  polys.forEach((rings) => {
+    if (d3.geoArea({ type: 'Polygon', coordinates: rings }) > 2 * Math.PI) { rings.forEach((r) => r.reverse()); }
+  });
+}
+
+async function run(job) {
+  const geo = await (await fetch(job.src)).json();
+  if (job.keep) { geo.features = geo.features.filter((f) => job.keep(f.properties)); }
+  geo.features.forEach((f) => { f.properties = job.props(f.properties); f.id = f.properties.code; rewind(f.geometry); });
+  let topo = topojson.topology({ [job.object]: geo }, job.quantize);
+  topo = topojson.presimplify(topo);
+  topo = topojson.simplify(topo, job.minWeight);
+  // Pas de filtrage des anneaux : il supprimerait les petits pays (Luxembourg, Malte…)
+  const text = JSON.stringify(topo);
+  const r = await fetch('save.php?file=' + encodeURIComponent(job.out), { method: 'POST', body: text });
+  log(job.out + ' : ' + geo.features.length + ' zones, ' + Math.round(text.length / 1024) + ' Ko → ' + await r.text());
+}
+
+document.getElementById('go').addEventListener('click', async () => {
+  for (const job of jobs) { await run(job); }
+  log('Terminé.');
+});
+</script>
+</body>
+</html>

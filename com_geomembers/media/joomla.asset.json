@@ -1,0 +1,16 @@
+{
+  "$schema": "https://developer.joomla.org/schemas/json-schema/web_assets.json",
+  "name": "com_geomembers",
+  "version": "auto",
+  "description": "GeoMembers",
+  "license": "GPL-2.0-or-later",
+  "assets": [
+    { "name": "com_geomembers.d3", "type": "script", "uri": "com_geomembers/d3.min.js", "version": "7.9.0", "attributes": { "defer": true } },
+    { "name": "com_geomembers.topojson", "type": "script", "uri": "com_geomembers/topojson-client.min.js", "version": "3.1.0", "attributes": { "defer": true } },
+    {
+      "name": "com_geomembers.map", "type": "script", "uri": "com_geomembers/geomembers.js", "version": "auto",
+      "dependencies": ["core", "com_geomembers.d3", "com_geomembers.topojson"], "attributes": { "defer": true }
+    },
+    { "name": "com_geomembers.map", "type": "style", "uri": "com_geomembers/geomembers.css", "version": "auto" }
+  ]
+}

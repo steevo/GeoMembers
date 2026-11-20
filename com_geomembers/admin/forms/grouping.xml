@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<form addfieldprefix="Steevo\Component\GeoMembers\Administrator\Field">
+	<fieldset name="main">
+		<field name="id" type="hidden" default="0" />
+		<field name="title" type="text" required="true" label="JGLOBAL_TITLE" />
+		<field name="alias" type="text" label="JFIELD_ALIAS_LABEL" hint="JFIELD_ALIAS_PLACEHOLDER" />
+		<field name="layer_id" type="geomemberslayer" required="true" label="COM_GEOMEMBERS_FIELD_LAYER_LABEL" description="COM_GEOMEMBERS_FIELD_GROUPING_LAYER_DESC" />
+		<field name="description" type="textarea" rows="2" label="JGLOBAL_DESCRIPTION" filter="safehtml" />
+		<field name="groups" type="subform" multiple="true" layout="joomla.form.field.subform.repeatable-table" buttons="add,remove,move" label="COM_GEOMEMBERS_GROUPS" description="COM_GEOMEMBERS_GROUPS_DESC">
+			<form>
+				<field name="id" type="hidden" default="0" />
+				<field name="title" type="text" label="JGLOBAL_TITLE" />
+				<field name="code" type="text" label="COM_GEOMEMBERS_FIELD_CODE_LABEL" />
+				<field name="color" type="color" label="COM_GEOMEMBERS_FIELD_COLOR_LABEL" />
+			</form>
+		</field>
+	</fieldset>
+	<fieldset name="side">
+		<field name="published" type="list" default="1" label="JSTATUS" class="form-select-color-state">
+			<option value="1">JPUBLISHED</option>
+			<option value="0">JUNPUBLISHED</option>
+		</field>
+		<field name="ordering" type="number" default="0" label="JFIELD_ORDERING_LABEL" />
+	</fieldset>
+</form>

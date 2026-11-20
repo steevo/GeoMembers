@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<form>
+	<fieldset name="main">
+		<field name="id" type="hidden" default="0" />
+		<field name="title" type="text" required="true" label="JGLOBAL_TITLE" />
+		<field name="alias" type="text" label="JFIELD_ALIAS_LABEL" hint="JFIELD_ALIAS_PLACEHOLDER" />
+		<field name="category" type="text" label="COM_GEOMEMBERS_FIELD_CATEGORY_LABEL" description="COM_GEOMEMBERS_FIELD_CATEGORY_DESC" />
+		<field name="year" type="number" min="0" max="2999" default="" label="COM_GEOMEMBERS_FIELD_YEAR_LABEL" />
+		<field name="description" type="textarea" rows="3" label="JGLOBAL_DESCRIPTION" filter="safehtml" />
+	</fieldset>
+	<fieldset name="side">
+		<field name="published" type="list" default="1" label="JSTATUS" class="form-select-color-state">
+			<option value="1">JPUBLISHED</option>
+			<option value="0">JUNPUBLISHED</option>
+		</field>
+		<field name="access" type="accesslevel" label="JFIELD_ACCESS_LABEL" />
+		<field name="ordering" type="number" default="0" label="JFIELD_ORDERING_LABEL" />
+	</fieldset>
+</form>

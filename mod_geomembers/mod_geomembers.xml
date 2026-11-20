@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<extension type="module" client="site" method="upgrade">
+	<name>mod_geomembers</name>
+	<creationDate>2026-11</creationDate>
+	<author>Philippe Ousset</author>
+	<copyright>Copyright (C) 2026 Philippe Ousset. All rights reserved.</copyright>
+	<license>GNU General Public License version 2 or later; see LICENSE.txt</license>
+	<authorEmail>steevo@steevo.fr</authorEmail>
+	<authorUrl>www.steevo.fr</authorUrl>
+	<version>1.0.1</version>
+	<description>MOD_GEOMEMBERS_XML_DESCRIPTION</description>
+	<namespace path="src">Steevo\Module\GeoMembers</namespace>
+	<files>
+		<folder module="mod_geomembers">services</folder>
+		<folder>language</folder>
+		<folder>src</folder>
+		<folder>tmpl</folder>
+	</files>
+	<config>
+		<fields name="params">
+			<fieldset name="basic" addfieldprefix="Steevo\Component\GeoMembers\Administrator\Field">
+			<field name="layer_id" type="geomemberslayer" required="true" label="COM_GEOMEMBERS_FIELD_LAYER_LABEL" description="COM_GEOMEMBERS_FIELD_MAP_LAYER_DESC" />
+			<field name="dataset_id" type="geomembersdataset" required="true" label="COM_GEOMEMBERS_FIELD_DATASET_LABEL" />
+			<field name="grouping_id" type="geomembersgrouping" default="0" label="COM_GEOMEMBERS_FIELD_DEFAULT_GROUPING_LABEL" description="COM_GEOMEMBERS_FIELD_DEFAULT_GROUPING_DESC">
+				<option value="0">COM_GEOMEMBERS_MAP_ZONES</option>
+			</field>
+			<field name="groupings" type="geomembersgrouping" multiple="true" layout="joomla.form.field.list-fancy-select" label="COM_GEOMEMBERS_FIELD_GROUPINGS_LABEL" description="COM_GEOMEMBERS_FIELD_GROUPINGS_DESC" />
+			<field name="show_zones" type="radio" default="1" layout="joomla.form.field.radio.switcher" label="COM_GEOMEMBERS_FIELD_SHOW_ZONES_LABEL" description="COM_GEOMEMBERS_FIELD_SHOW_ZONES_DESC">
+				<option value="0">JNO</option>
+				<option value="1">JYES</option>
+			</field>
+			<field name="zones_label" type="text" label="COM_GEOMEMBERS_FIELD_ZONES_LABEL_LABEL" hint="COM_GEOMEMBERS_MAP_ZONES" showon="show_zones:1" />
+			<field name="switcher" type="radio" default="1" layout="joomla.form.field.radio.switcher" label="COM_GEOMEMBERS_FIELD_SWITCHER_LABEL">
+				<option value="0">JNO</option>
+				<option value="1">JYES</option>
+			</field>
+			<field name="show_foreign" type="radio" default="1" layout="joomla.form.field.radio.switcher" label="COM_GEOMEMBERS_FIELD_SHOW_FOREIGN_LABEL" description="COM_GEOMEMBERS_FIELD_SHOW_FOREIGN_DESC">
+				<option value="0">JNO</option>
+				<option value="1">JYES</option>
+			</field>
+			<field name="show_insets" type="radio" default="1" layout="joomla.form.field.radio.switcher" label="COM_GEOMEMBERS_FIELD_SHOW_INSETS_LABEL">
+				<option value="0">JNO</option>
+				<option value="1">JYES</option>
+			</field>
+			</fieldset>
+			<fieldset name="display" label="COM_GEOMEMBERS_FIELDSET_DISPLAY" addfieldprefix="SteevoComponentGeoMembersAdministratorField">
+			<field name="mode" type="list" default="choropleth" label="COM_GEOMEMBERS_FIELD_MODE_LABEL" description="COM_GEOMEMBERS_FIELD_MODE_DESC">
+				<option value="choropleth">COM_GEOMEMBERS_MODE_CHOROPLETH</option>
+				<option value="groups">COM_GEOMEMBERS_MODE_GROUPS</option>
+				<option value="circles">COM_GEOMEMBERS_MODE_CIRCLES</option>
+			</field>
+			<field name="scheme" type="list" default="" label="COM_GEOMEMBERS_FIELD_SCHEME_LABEL">
+				<option value="">JGLOBAL_USE_GLOBAL</option>
+				<option value="Blues">COM_GEOMEMBERS_SCHEME_BLUES</option>
+				<option value="Greens">COM_GEOMEMBERS_SCHEME_GREENS</option>
+				<option value="Oranges">COM_GEOMEMBERS_SCHEME_ORANGES</option>
+				<option value="Reds">COM_GEOMEMBERS_SCHEME_REDS</option>
+				<option value="Purples">COM_GEOMEMBERS_SCHEME_PURPLES</option>
+				<option value="YlOrRd">COM_GEOMEMBERS_SCHEME_YLORRD</option>
+				<option value="Viridis">COM_GEOMEMBERS_SCHEME_VIRIDIS</option>
+			</field>
+			<field name="labels" type="list" default="value" label="COM_GEOMEMBERS_FIELD_LABELS_LABEL">
+				<option value="value">COM_GEOMEMBERS_LABELS_VALUE</option>
+				<option value="name_value">COM_GEOMEMBERS_LABELS_NAME_VALUE</option>
+				<option value="none">COM_GEOMEMBERS_LABELS_NONE</option>
+			</field>
+			<field name="zero_labels" type="radio" default="0" layout="joomla.form.field.radio.switcher" label="COM_GEOMEMBERS_FIELD_ZERO_LABELS_LABEL">
+				<option value="0">JNO</option>
+				<option value="1">JYES</option>
+			</field>
+			<field name="hatch_zero" type="radio" default="1" layout="joomla.form.field.radio.switcher" label="COM_GEOMEMBERS_FIELD_HATCH_ZERO_LABEL">
+				<option value="0">JNO</option>
+				<option value="1">JYES</option>
+			</field>
+			<field name="threshold" type="number" min="0" default="" hint="JGLOBAL_USE_GLOBAL" label="COM_GEOMEMBERS_FIELD_THRESHOLD_LABEL" description="COM_GEOMEMBERS_FIELD_THRESHOLD_DESC" />
+			<field name="show_dataset_title" type="radio" default="1" layout="joomla.form.field.radio.switcher" label="COM_GEOMEMBERS_FIELD_SHOW_TITLE_LABEL">
+				<option value="0">JNO</option>
+				<option value="1">JYES</option>
+			</field>
+			<field name="show_legend" type="radio" default="1" layout="joomla.form.field.radio.switcher" label="COM_GEOMEMBERS_FIELD_SHOW_LEGEND_LABEL">
+				<option value="0">JNO</option>
+				<option value="1">JYES</option>
+			</field>
+			<field name="show_table" type="radio" default="1" layout="joomla.form.field.radio.switcher" label="COM_GEOMEMBERS_FIELD_SHOW_TABLE_LABEL">
+				<option value="0">JNO</option>
+				<option value="1">JYES</option>
+			</field>
+			<field name="show_download" type="radio" default="1" layout="joomla.form.field.radio.switcher" label="COM_GEOMEMBERS_FIELD_SHOW_DOWNLOAD_LABEL">
+				<option value="0">JNO</option>
+				<option value="1">JYES</option>
+			</field>
+			<field name="height" type="number" min="0" default="0" label="COM_GEOMEMBERS_FIELD_HEIGHT_LABEL" description="COM_GEOMEMBERS_FIELD_HEIGHT_DESC" />
+			</fieldset>
+			<fieldset name="advanced">
+				<field name="layout" type="modulelayout" label="JFIELD_ALT_LAYOUT_LABEL" class="form-select" validate="moduleLayout" />
+				<field name="moduleclass_sfx" type="textarea" label="COM_MODULES_FIELD_MODULECLASS_SFX_LABEL" rows="3" validate="CssIdentifier" />
+				<field name="cache" type="list" default="0" label="COM_MODULES_FIELD_CACHING_LABEL">
+					<option value="0">COM_MODULES_FIELD_VALUE_NOCACHING</option>
+				</field>
+			</fieldset>
+		</fields>
+	</config>
+</extension>

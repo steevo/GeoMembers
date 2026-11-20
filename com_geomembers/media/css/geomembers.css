@@ -1,0 +1,34 @@
+/* GeoMembers – cartes de répartition */
+.geomembers { position: relative; margin: 0 0 1.5rem; }
+.geomembers-loading { padding: 2rem; text-align: center; color: var(--gm-muted, #6c757d); }
+.geomembers-header { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: .5rem 1rem; margin-bottom: .5rem; }
+.geomembers-title { font-weight: 600; font-size: 1.1rem; }
+.geomembers-switcher { display: flex; align-items: center; gap: .4rem; margin: 0; }
+.geomembers-switcher select { width: auto; }
+.geomembers-figure { position: relative; }
+.geomembers-figure svg { display: block; width: 100%; height: auto; max-height: var(--geomembers-height, none); }
+.geomembers .gm-zone { transition: filter .15s; }
+.geomembers .gm-zone.is-active { filter: brightness(.82) saturate(1.2); }
+.geomembers.is-dark .gm-zone.is-active { filter: brightness(1.3); }
+.geomembers-tooltip {
+  position: absolute; top: 0; left: 0; z-index: 5; pointer-events: none; max-width: 16rem;
+  padding: .35rem .55rem; border-radius: .375rem; font-size: .85rem; line-height: 1.3;
+  background: var(--gm-bg, #fff); color: var(--gm-text, #212529);
+  border: 1px solid var(--gm-border, #dee2e6); box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .15);
+}
+.geomembers-tooltip > * { display: block; }
+.geomembers-legend { display: flex; flex-wrap: wrap; align-items: center; gap: .5rem 1.5rem; margin-top: .5rem; font-size: .85rem; }
+.geomembers-legend-scale { display: inline-flex; flex-direction: column; min-width: 12rem; }
+.geomembers-gradient { display: block; height: .7rem; border-radius: .2rem; border: 1px solid var(--gm-border, #dee2e6); }
+.geomembers-gradient-labels { display: flex; justify-content: space-between; color: var(--gm-muted, #6c757d); }
+.geomembers-legend-zero { display: inline-flex; align-items: center; gap: .35rem; }
+.geomembers-swatch { display: inline-block; width: 1rem; height: 1rem; border-radius: .2rem; border: 1px solid var(--gm-border, #dee2e6); vertical-align: -.15rem; margin-right: .3rem; }
+.geomembers-hatch { background: repeating-linear-gradient(45deg, var(--gm-land, #e9ecef) 0 3px, var(--gm-muted, #6c757d) 3px 4px); opacity: .8; }
+.geomembers-legend-groups { display: flex; flex-wrap: wrap; gap: .25rem 1.25rem; padding: 0; margin: 0; list-style: none; }
+.geomembers-footer { display: flex; flex-wrap: wrap; align-items: center; gap: .5rem 1.25rem; margin-top: .5rem; font-size: .8rem; color: var(--gm-muted, #6c757d); }
+.geomembers-total { font-weight: 600; color: var(--gm-text, inherit); }
+.geomembers-download { display: inline-flex; gap: .25rem; margin-left: auto; }
+.geomembers-table { margin-top: .75rem; }
+.geomembers-table summary { cursor: pointer; font-weight: 600; }
+.geomembers-data { max-width: 32rem; margin-top: .5rem; }
+.geomembers-data .geomembers-subhead th { padding-top: .75rem; }

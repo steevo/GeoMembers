@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<extension type="package" method="upgrade">
+	<name>pkg_geomembers</name>
+	<packagename>geomembers</packagename>
+	<creationDate>2026-11</creationDate>
+	<author>Philippe Ousset</author>
+	<copyright>Copyright (C) 2026 Philippe Ousset. All rights reserved.</copyright>
+	<license>GNU General Public License version 2 or later; see LICENSE.txt</license>
+	<authorEmail>steevo@steevo.fr</authorEmail>
+	<authorUrl>www.steevo.fr</authorUrl>
+	<version>1.0.1</version>
+	<description>PKG_GEOMEMBERS_XML_DESCRIPTION</description>
+	<blockChildUninstall>true</blockChildUninstall>
+	<languages folder="language">
+		<language tag="fr-FR">fr-FR/pkg_geomembers.sys.ini</language>
+		<language tag="en-GB">en-GB/pkg_geomembers.sys.ini</language>
+		<language tag="de-DE">de-DE/pkg_geomembers.sys.ini</language>
+		<language tag="es-ES">es-ES/pkg_geomembers.sys.ini</language>
+	</languages>
+	<files folder="packages">
+		<file type="component" id="com_geomembers">com_geomembers.zip</file>
+		<file type="module" id="mod_geomembers" client="site">mod_geomembers.zip</file>
+	</files>
+</extension>

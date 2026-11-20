@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<extension type="component" method="upgrade">
+	<name>com_geomembers</name>
+	<creationDate>2026-11</creationDate>
+	<author>Philippe Ousset</author>
+	<copyright>Copyright (C) 2026 Philippe Ousset. All rights reserved.</copyright>
+	<license>GNU General Public License version 2 or later; see LICENSE.txt</license>
+	<authorEmail>steevo@steevo.fr</authorEmail>
+	<authorUrl>www.steevo.fr</authorUrl>
+	<version>1.0.1</version>
+	<description>COM_GEOMEMBERS_XML_DESCRIPTION</description>
+	<scriptfile>script.php</scriptfile>
+	<namespace path="src">Steevo\Component\GeoMembers</namespace>
+
+	<install>
+		<sql>
+			<file charset="utf8" driver="mysql">sql/install.mysql.utf8.sql</file>
+		</sql>
+	</install>
+	<uninstall>
+		<sql>
+			<file charset="utf8" driver="mysql">sql/uninstall.mysql.utf8.sql</file>
+		</sql>
+	</uninstall>
+	<update>
+		<schemas>
+			<schemapath type="mysql">sql/updates/mysql</schemapath>
+		</schemas>
+	</update>
+
+	<files folder="site">
+		<filename>index.html</filename>
+		<folder>src</folder>
+		<folder>tmpl</folder>
+	</files>
+
+	<media destination="com_geomembers" folder="media">
+		<filename>index.html</filename>
+		<filename>joomla.asset.json</filename>
+		<folder>css</folder>
+		<folder>flags</folder>
+		<folder>geo</folder>
+		<folder>js</folder>
+	</media>
+
+	<administration>
+		<menu img="class:map">COM_GEOMEMBERS</menu>
+		<submenu>
+			<menu link="option=com_geomembers&amp;view=datasets" view="datasets">COM_GEOMEMBERS_SUBMENU_DATASETS</menu>
+			<menu link="option=com_geomembers&amp;view=groupings" view="groupings">COM_GEOMEMBERS_SUBMENU_GROUPINGS</menu>
+			<menu link="option=com_geomembers&amp;view=layers" view="layers">COM_GEOMEMBERS_SUBMENU_LAYERS</menu>
+		</submenu>
+		<files folder="admin">
+			<filename>access.xml</filename>
+			<filename>config.xml</filename>
+			<filename>index.html</filename>
+			<folder>forms</folder>
+			<folder>language</folder>
+			<folder>services</folder>
+			<folder>sql</folder>
+			<folder>src</folder>
+			<folder>tmpl</folder>
+		</files>
+	</administration>
+</extension>
