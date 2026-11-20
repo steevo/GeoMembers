@@ -141,8 +141,8 @@ Les fonds de carte se régénèrent depuis les données sources avec
 `build/build.html` (à ouvrir sur un serveur local ; les sources vont dans
 `build/src/`, non versionné).
 
-`build/testdata-camp-2026.sql` contient un jeu d'essai (effectifs 2026 du Club
-Autos Miniatures Peugeot).
+Les jeux d'essai locaux (`build/testdata-*.sql`) ne sont pas versionnés : ils
+peuvent contenir des effectifs réels.
 
 ## Structure
 
