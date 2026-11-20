@@ -14,6 +14,8 @@ function zipDir(string $src, string $zipFile): void
         $rel = str_replace('\\', '/', substr($file->getPathname(), strlen($src) + 1));
         $zip->addFile($file->getPathname(), $rel);
     }
+    // Texte de la licence à la racine de chaque archive
+    $zip->addFile(dirname(__DIR__) . '/LICENSE.txt', 'LICENSE.txt');
     $zip->close();
     echo basename($zipFile) . ' : ' . round(filesize($zipFile) / 1024) . " Ko\n";
 }
