@@ -70,7 +70,7 @@ CREATE TABLE IF NOT EXISTS `#__geomembers_datasets` (
   `id` int unsigned NOT NULL AUTO_INCREMENT,
   `title` varchar(255) NOT NULL DEFAULT '',
   `alias` varchar(190) NOT NULL DEFAULT '',
-  `category` varchar(100) NOT NULL DEFAULT '',
+  `catid` int unsigned NOT NULL DEFAULT 0,
   `year` smallint unsigned NOT NULL DEFAULT 0,
   `description` text,
   `published` tinyint NOT NULL DEFAULT 1,
@@ -83,7 +83,8 @@ CREATE TABLE IF NOT EXISTS `#__geomembers_datasets` (
   `checked_out` int unsigned,
   `checked_out_time` datetime,
   PRIMARY KEY (`id`),
-  KEY `idx_access` (`access`)
+  KEY `idx_access` (`access`),
+  KEY `idx_catid` (`catid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 DEFAULT COLLATE=utf8mb4_unicode_ci;
 
 CREATE TABLE IF NOT EXISTS `#__geomembers_counts` (

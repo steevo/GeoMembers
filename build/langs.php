@@ -3,13 +3,20 @@
 // .sys.ini du composant, langues du module et du paquet. Usage : php build/langs.php
 $root  = dirname(__DIR__);
 $tags  = ['fr-FR', 'en-GB', 'de-DE', 'es-ES'];
-$sys   = ['COM_GEOMEMBERS', 'COM_GEOMEMBERS_XML_DESCRIPTION', 'COM_GEOMEMBERS_SUBMENU_DATASETS', 'COM_GEOMEMBERS_SUBMENU_GROUPINGS',
+$sys   = ['COM_GEOMEMBERS', 'COM_GEOMEMBERS_XML_DESCRIPTION', 'COM_GEOMEMBERS_SUBMENU_DATASETS', 'COM_GEOMEMBERS_SUBMENU_CATEGORIES', 'COM_GEOMEMBERS_SUBMENU_GROUPINGS',
     'COM_GEOMEMBERS_SUBMENU_LAYERS', 'COM_GEOMEMBERS_MAP_VIEW_TITLE', 'COM_GEOMEMBERS_MAP_VIEW_DESC'];
 $mod   = [
     'fr-FR' => ['GeoMembers – carte', 'Affiche une carte de répartition GeoMembers (le composant GeoMembers doit être installé).'],
     'en-GB' => ['GeoMembers – map', 'Displays a GeoMembers distribution map (the GeoMembers component must be installed).'],
     'de-DE' => ['GeoMembers – Karte', 'Zeigt eine GeoMembers-Verteilungskarte (die Komponente GeoMembers muss installiert sein).'],
     'es-ES' => ['GeoMembers – mapa', 'Muestra un mapa de distribución de GeoMembers (el componente GeoMembers debe estar instalado).'],
+];
+
+$plg   = [
+    'fr-FR' => ['Contenu - GeoMembers', 'Empêche la suppression d\'une catégorie GeoMembers qui contient encore des jeux de données.'],
+    'en-GB' => ['Content - GeoMembers', 'Prevents deleting a GeoMembers category that still contains datasets.'],
+    'de-DE' => ['Inhalt - GeoMembers', 'Verhindert das Löschen einer GeoMembers-Kategorie, die noch Datensätze enthält.'],
+    'es-ES' => ['Contenido - GeoMembers', 'Impide eliminar una categoría de GeoMembers que todavía contiene conjuntos de datos.'],
 ];
 
 // Clés utilisées dans le manifeste du module
@@ -46,6 +53,13 @@ foreach ($tags as $tag) {
         }
     }
     file_put_contents($root . "/mod_geomembers/language/$tag/mod_geomembers.ini", $modIni);
+
+    @mkdir($root . "/plg_content_geomembers/language/$tag", 0777, true);
+    $plgIni = $header . 'PLG_CONTENT_GEOMEMBERS="' . $plg[$tag][0] . "\"
+" . 'PLG_CONTENT_GEOMEMBERS_XML_DESCRIPTION="' . $plg[$tag][1] . "\"
+";
+    file_put_contents($root . "/plg_content_geomembers/language/$tag/plg_content_geomembers.ini", $plgIni);
+    file_put_contents($root . "/plg_content_geomembers/language/$tag/plg_content_geomembers.sys.ini", $plgIni);
 
     @mkdir($root . "/language/$tag", 0777, true);
     file_put_contents(

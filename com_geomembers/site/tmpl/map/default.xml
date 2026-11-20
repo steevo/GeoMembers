@@ -63,11 +63,11 @@
 			<option value="0">JNO</option>
 			<option value="1">JYES</option>
 		</field>
-		<field name="show_legend" type="radio" default="1" layout="joomla.form.field.radio.switcher" label="COM_GEOMEMBERS_FIELD_SHOW_LEGEND_LABEL">
+		<field name="show_legend" type="list" default="" useglobal="true" label="COM_GEOMEMBERS_FIELD_SHOW_LEGEND_LABEL" description="COM_GEOMEMBERS_FIELD_USE_GLOBAL_DESC">
 			<option value="0">JNO</option>
 			<option value="1">JYES</option>
 		</field>
-		<field name="show_table" type="radio" default="1" layout="joomla.form.field.radio.switcher" label="COM_GEOMEMBERS_FIELD_SHOW_TABLE_LABEL">
+		<field name="show_table" type="list" default="" useglobal="true" label="COM_GEOMEMBERS_FIELD_SHOW_TABLE_LABEL" description="COM_GEOMEMBERS_FIELD_USE_GLOBAL_DESC">
 			<option value="0">JNO</option>
 			<option value="1">JYES</option>
 		</field>

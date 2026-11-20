@@ -11,6 +11,14 @@
 			<option value="YlOrRd">COM_GEOMEMBERS_SCHEME_YLORRD</option>
 			<option value="Viridis">COM_GEOMEMBERS_SCHEME_VIRIDIS</option>
 		</field>
+		<field name="show_legend" type="radio" default="1" layout="joomla.form.field.radio.switcher" label="COM_GEOMEMBERS_FIELD_SHOW_LEGEND_LABEL" description="COM_GEOMEMBERS_FIELD_SHOW_LEGEND_DESC">
+			<option value="0">JNO</option>
+			<option value="1">JYES</option>
+		</field>
+		<field name="show_table" type="radio" default="1" layout="joomla.form.field.radio.switcher" label="COM_GEOMEMBERS_FIELD_SHOW_TABLE_LABEL" description="COM_GEOMEMBERS_FIELD_SHOW_TABLE_DESC">
+			<option value="0">JNO</option>
+			<option value="1">JYES</option>
+		</field>
 	</fieldset>
 	<fieldset name="permissions" label="JCONFIG_PERMISSIONS_LABEL" description="JCONFIG_PERMISSIONS_DESC">
 		<field name="rules" type="rules" label="JCONFIG_PERMISSIONS_LABEL" filter="rules" validate="rules" component="com_geomembers" section="component" />

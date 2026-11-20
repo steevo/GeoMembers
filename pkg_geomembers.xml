@@ -8,9 +8,10 @@
 	<license>GNU General Public License version 2 or later; see LICENSE.txt</license>
 	<authorEmail>steevo@steevo.fr</authorEmail>
 	<authorUrl>www.steevo.fr</authorUrl>
-	<version>1.0.1</version>
+	<version>1.0.2</version>
 	<description>PKG_GEOMEMBERS_XML_DESCRIPTION</description>
 	<blockChildUninstall>true</blockChildUninstall>
+	<scriptfile>pkg_script.php</scriptfile>
 	<languages folder="language">
 		<language tag="fr-FR">fr-FR/pkg_geomembers.sys.ini</language>
 		<language tag="en-GB">en-GB/pkg_geomembers.sys.ini</language>
@@ -20,5 +21,6 @@
 	<files folder="packages">
 		<file type="component" id="com_geomembers">com_geomembers.zip</file>
 		<file type="module" id="mod_geomembers" client="site">mod_geomembers.zip</file>
+		<file type="plugin" id="geomembers" group="content">plg_content_geomembers.zip</file>
 	</files>
 </extension>

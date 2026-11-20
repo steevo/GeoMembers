@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<extension type="plugin" group="content" method="upgrade">
+	<name>plg_content_geomembers</name>
+	<creationDate>2026-11</creationDate>
+	<author>Philippe Ousset</author>
+	<copyright>Copyright (C) 2026 Philippe Ousset. All rights reserved.</copyright>
+	<license>GNU General Public License version 2 or later; see LICENSE.txt</license>
+	<authorEmail>steevo@steevo.fr</authorEmail>
+	<authorUrl>www.steevo.fr</authorUrl>
+	<version>1.0.2</version>
+	<description>PLG_CONTENT_GEOMEMBERS_XML_DESCRIPTION</description>
+	<namespace path="src">Steevo\Plugin\Content\GeoMembers</namespace>
+	<files>
+		<folder plugin="geomembers">services</folder>
+		<folder>language</folder>
+		<folder>src</folder>
+	</files>
+</extension>

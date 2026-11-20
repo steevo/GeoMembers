@@ -23,7 +23,7 @@ function zipDir(string $src, string $zipFile): void
 $tmp = sys_get_temp_dir() . '/geomembers-pkg-' . uniqid();
 mkdir($tmp . '/packages', 0777, true);
 
-foreach (['com_geomembers', 'mod_geomembers'] as $ext) {
+foreach (['com_geomembers', 'mod_geomembers', 'plg_content_geomembers'] as $ext) {
     if (is_dir($root . '/' . $ext) && glob($root . '/' . $ext . '/*.xml')) {
         zipDir($root . '/' . $ext, $dist . '/' . $ext . '.zip');
         copy($dist . '/' . $ext . '.zip', $tmp . '/packages/' . $ext . '.zip');
@@ -32,6 +32,7 @@ foreach (['com_geomembers', 'mod_geomembers'] as $ext) {
 
 if (is_file($root . '/pkg_geomembers.xml')) {
     copy($root . '/pkg_geomembers.xml', $tmp . '/pkg_geomembers.xml');
+    copy($root . '/pkg_script.php', $tmp . '/pkg_script.php');
     foreach (glob($root . '/language/*/pkg_geomembers.sys.ini') as $ini) {
         $tag = basename(dirname($ini));
         @mkdir($tmp . '/language/' . $tag, 0777, true);

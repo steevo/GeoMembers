@@ -47,13 +47,23 @@ class MapDataHelper
         $datasetId = (int) $params->get('dataset_id');
         $dataset   = $db->setQuery(
             $db->getQuery(true)
-                ->select('*')
-                ->from($db->quoteName('#__geomembers_datasets'))
-                ->where($db->quoteName('id') . ' = ' . $datasetId)
-                ->where($db->quoteName('published') . ' = 1')
+                ->select('d.*')
+                ->select($db->quoteName(['c.published', 'c.access'], ['category_published', 'category_access']))
+                ->from($db->quoteName('#__geomembers_datasets', 'd'))
+                ->join('LEFT', $db->quoteName('#__categories', 'c'), 'c.id = d.catid')
+                ->where($db->quoteName('d.id') . ' = ' . $datasetId)
+                ->where($db->quoteName('d.published') . ' = 1')
         )->loadObject();
 
-        if (!$dataset || !\in_array((int) $dataset->access, $user->getAuthorisedViewLevels(), true)) {
+        $levels = $user->getAuthorisedViewLevels();
+
+        if (!$dataset || !\in_array((int) $dataset->access, $levels, true)) {
+            return null;
+        }
+
+        // La catégorie du jeu doit aussi être publiée et accessible
+        if ($dataset->category_published !== null
+            && ((int) $dataset->category_published !== 1 || !\in_array((int) $dataset->category_access, $levels, true))) {
             return null;
         }
 
@@ -252,8 +262,8 @@ class MapDataHelper
                 'zeroLabels' => (int) $params->get('zero_labels', 0),
                 'hatchZero'  => (int) $params->get('hatch_zero', 1),
                 'switcher'   => (int) $params->get('switcher', 1),
-                'table'      => (int) $params->get('show_table', 1),
-                'legend'     => (int) $params->get('show_legend', 1),
+                'table'      => self::option($params, $global, 'show_table'),
+                'legend'     => self::option($params, $global, 'show_legend'),
                 'download'   => (int) $params->get('show_download', 1),
                 'title'      => (int) $params->get('show_dataset_title', 1),
                 'insets'     => (int) $params->get('show_insets', 1),
@@ -273,6 +283,16 @@ class MapDataHelper
                 'sources'     => Text::_('COM_GEOMEMBERS_MAP_SOURCES'),
             ],
         ];
+    }
+
+    /**
+     * Option d'affichage du menu ou du module ; vide (« Utiliser global ») : valeur des options du composant.
+     */
+    protected static function option(Registry $params, Registry $global, string $name, int $default = 1): int
+    {
+        $value = $params->get($name, '');
+
+        return (int) ($value === '' || $value === null ? $global->get($name, $default) : $value);
     }
 
     /**

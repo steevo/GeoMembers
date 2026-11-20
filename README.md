@@ -21,7 +21,9 @@ or custom grouping. Interface available in French, English, German and Spanish.*
   l'installation, plus autant de regroupements personnalisés que nécessaire
   (délégations, anciennes régions…), avec une couleur par groupe.
 - **Jeux de données** : un par année, ou par thème (ex. présents à
-  l'assemblée générale), avec niveau d'accès Joomla.
+  l'assemblée générale), classés dans les **catégories Joomla** (gestionnaire
+  standard : sous-catégories, accès, publication), avec niveau d'accès Joomla.
+  Une catégorie qui contient encore des jeux ne peut pas être supprimée.
 - **Saisie des effectifs** à la maille la plus fine (département en France,
   pays ailleurs) ; les totaux par pays, région ou groupe sont calculés.
   Import et export CSV.
@@ -31,6 +33,8 @@ or custom grouping. Interface available in French, English, German and Spanish.*
 - **Affichage** : sélecteur de regroupement pour le visiteur, légende,
   infobulles, tableau des effectifs, export SVG et PNG, seuil de
   confidentialité optionnel (« < 3 »).
+  La légende et le tableau s'affichent ou non selon les options du
+  composant, chaque élément de menu ou module pouvant forcer son choix.
 - **Modes clair et sombre**, compatibles avec les gabarits Bootstrap 5
   (Cassiopeia) et T4.
 - **Module** pour afficher une carte compacte dans une position de gabarit.
@@ -48,15 +52,20 @@ or custom grouping. Interface available in French, English, German and Spanish.*
 1. Construire le paquet (voir [Construction](#construction)) ou récupérer
    `pkg_geomembers.zip` dans une version publiée.
 2. Dans Joomla : **Système → Installer → Extensions**, envoyer
-   `pkg_geomembers.zip`. Le paquet installe le composant et le module.
+   `pkg_geomembers.zip`. Le paquet installe le composant, le module et le
+   plugin « Contenu - GeoMembers » (protection des catégories), activé
+   automatiquement.
 3. L'installation crée deux découpages (« Pays du monde » et
    « France – départements ») et deux regroupements (« Régions » et
-   « Continents »), avec des noms dans la langue par défaut du site.
+   « Continents »), ainsi qu'une catégorie « Non catégorisé », avec des noms
+   dans la langue par défaut du site.
 
 ## Prise en main
 
 1. **Composants → GeoMembers → Jeux de données** : créer un jeu
-   (ex. « Adhérents 2026 »), puis **Saisir les effectifs**.
+   (ex. « Adhérents 2026 »), puis **Saisir les effectifs**. Une nouvelle
+   catégorie peut être saisie directement dans le champ Catégorie ; les
+   catégories se gèrent dans **Composants → GeoMembers → Catégories**.
 2. Créer un élément de menu **GeoMembers → Carte de répartition** : choisir le
    découpage, le jeu de données, le regroupement par défaut et les options
    d'affichage.
@@ -149,6 +158,8 @@ peuvent contenir des effectifs réels.
 ```
 com_geomembers/     composant (admin, site, media, script d'installation)
 mod_geomembers/     module
+plg_content_geomembers/  plugin de protection des catégories
+pkg_script.php      script du paquet (activation du plugin)
 language/           langues du paquet
 pkg_geomembers.xml  manifeste du paquet
 build/              construction, génération des fonds, jeu d'essai

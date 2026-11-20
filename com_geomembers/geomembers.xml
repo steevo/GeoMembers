@@ -7,7 +7,7 @@
 	<license>GNU General Public License version 2 or later; see LICENSE.txt</license>
 	<authorEmail>steevo@steevo.fr</authorEmail>
 	<authorUrl>www.steevo.fr</authorUrl>
-	<version>1.0.1</version>
+	<version>1.0.2</version>
 	<description>COM_GEOMEMBERS_XML_DESCRIPTION</description>
 	<scriptfile>script.php</scriptfile>
 	<namespace path="src">Steevo\Component\GeoMembers</namespace>
@@ -47,6 +47,7 @@
 		<menu img="class:map">COM_GEOMEMBERS</menu>
 		<submenu>
 			<menu link="option=com_geomembers&amp;view=datasets" view="datasets">COM_GEOMEMBERS_SUBMENU_DATASETS</menu>
+			<menu link="option=com_categories&amp;extension=com_geomembers" view="categories">COM_GEOMEMBERS_SUBMENU_CATEGORIES</menu>
 			<menu link="option=com_geomembers&amp;view=groupings" view="groupings">COM_GEOMEMBERS_SUBMENU_GROUPINGS</menu>
 			<menu link="option=com_geomembers&amp;view=layers" view="layers">COM_GEOMEMBERS_SUBMENU_LAYERS</menu>
 		</submenu>

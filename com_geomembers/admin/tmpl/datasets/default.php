@@ -29,7 +29,7 @@ $this->document->getWebAssetManager()->useScript('multiselect');
 					<td class="w-1 text-center"><?php echo HTMLHelper::_('grid.checkall'); ?></td>
 					<th scope="col" class="w-1 text-center"><?php echo Text::_('JSTATUS'); ?></th>
 					<th scope="col"><?php echo Text::_('JGLOBAL_TITLE'); ?></th>
-					<th scope="col" class="w-10"><?php echo Text::_('COM_GEOMEMBERS_FIELD_CATEGORY_LABEL'); ?></th>
+					<th scope="col" class="w-10"><?php echo Text::_('JCATEGORY'); ?></th>
 					<th scope="col" class="w-5 text-center"><?php echo Text::_('COM_GEOMEMBERS_FIELD_YEAR_LABEL'); ?></th>
 					<th scope="col" class="w-10 text-end"><?php echo Text::_('COM_GEOMEMBERS_TOTAL'); ?></th>
 					<th scope="col" class="w-15"><?php echo Text::_('COM_GEOMEMBERS_COUNTS'); ?></th>
@@ -47,7 +47,7 @@ $this->document->getWebAssetManager()->useScript('multiselect');
 								<?php echo $this->escape($item->title); ?>
 							</a>
 						</th>
-						<td><?php echo $this->escape($item->category); ?></td>
+						<td><?php echo $this->escape((string) $item->category_title); ?></td>
 						<td class="text-center"><?php echo $item->year ? (int) $item->year : ''; ?></td>
 						<td class="text-end"><?php echo (int) $item->total; ?></td>
 						<td>

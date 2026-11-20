@@ -14,6 +14,7 @@ namespace Steevo\Component\GeoMembers\Administrator\Model;
 use Joomla\CMS\Factory;
 use Joomla\CMS\Form\Form;
 use Joomla\CMS\MVC\Model\AdminModel;
+use Steevo\Component\GeoMembers\Administrator\Helper\CategoryHelper;
 
 /**
  * Jeu de données : un ensemble de comptages (adhérents 2026, présents à l'AG…).
@@ -40,6 +41,31 @@ class DatasetModel extends AdminModel
         $this->preprocessData('com_geomembers.dataset', $data);
 
         return $data;
+    }
+
+    public function save($data): bool
+    {
+        // Catégorie saisie dans le champ (valeur « #new#Titre », ou titre seul) : créée si elle n'existe pas
+        $catid = trim((string) ($data['catid'] ?? ''));
+
+        if ($catid !== '' && !ctype_digit($catid)) {
+            if (!Factory::getApplication()->getIdentity()->authorise('core.create', 'com_geomembers')) {
+                $this->setError(\Joomla\CMS\Language\Text::_('JLIB_APPLICATION_ERROR_CREATE_RECORD_NOT_PERMITTED'));
+
+                return false;
+            }
+
+            $title         = str_starts_with($catid, '#new#') ? substr($catid, 5) : $catid;
+            $data['catid'] = CategoryHelper::findOrCreate($this->getDatabase(), $title);
+
+            if (!$data['catid']) {
+                $this->setError(\Joomla\CMS\Language\Text::_('JLIB_APPLICATION_ERROR_SAVE_FAILED'));
+
+                return false;
+            }
+        }
+
+        return parent::save($data);
     }
 
     public function delete(&$pks): bool

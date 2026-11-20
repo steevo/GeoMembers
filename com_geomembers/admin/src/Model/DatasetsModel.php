@@ -19,7 +19,7 @@ class DatasetsModel extends ListModel
     public function __construct($config = [], ?\Joomla\CMS\MVC\Factory\MVCFactoryInterface $factory = null)
     {
         if (empty($config['filter_fields'])) {
-            $config['filter_fields'] = ['id', 'a.id', 'title', 'a.title', 'year', 'a.year', 'category', 'a.category', 'published', 'a.published', 'ordering', 'a.ordering'];
+            $config['filter_fields'] = ['id', 'a.id', 'title', 'a.title', 'year', 'a.year', 'category_title', 'c.title', 'catid', 'a.catid', 'published', 'a.published', 'ordering', 'a.ordering'];
         }
 
         parent::__construct($config, $factory);
@@ -39,13 +39,17 @@ class DatasetsModel extends ListModel
 
         $query->select('(SELECT SUM(c.value) FROM ' . $db->quoteName('#__geomembers_counts', 'c') . ' WHERE c.dataset_id = a.id) AS total')
             ->select($db->quoteName('ag.title', 'access_level'))
-            ->join('LEFT', $db->quoteName('#__viewlevels', 'ag'), 'ag.id = a.access');
+            ->join('LEFT', $db->quoteName('#__viewlevels', 'ag'), 'ag.id = a.access')
+            ->select($db->quoteName('c.title', 'category_title'))
+            ->join('LEFT', $db->quoteName('#__categories', 'c'), 'c.id = a.catid');
 
         $search = trim((string) $this->getState('filter.search'));
 
         if ($search !== '') {
             $like = '%' . $search . '%';
-            $query->where($db->quoteName('a.title') . ' LIKE :search')->bind(':search', $like);
+            $query->where('(' . $db->quoteName('a.title') . ' LIKE :search OR ' . $db->quoteName('c.title') . ' LIKE :search2)')
+                ->bind(':search', $like)
+                ->bind(':search2', $like);
         }
 
         $published = (string) $this->getState('filter.published');
